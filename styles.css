@@ -20,12 +20,11 @@ body {
   font-family: "Montserrat", sans-serif;
   background: linear-gradient(135deg, var(--bg-light) 0%, #e3e6ec 100%);
   margin: 0;
-  padding: 0.5rem; 
+  padding: 0.5rem;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  
 }
 
 .container {
@@ -38,6 +37,8 @@ body {
   transition: all 0.3s ease;
   margin-top: 1rem;
   user-select: none;
+  position: relative;
+  z-index: 1;
 }
 
 h1 {
@@ -109,6 +110,8 @@ h1 {
   color: var(--text-primary);
   resize: none;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .input:focus {
@@ -161,6 +164,8 @@ h1 {
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 2rem;
+  position: relative;
+  z-index: 2;
 }
 /* Button Styles */
 .btn-base,
@@ -559,6 +564,7 @@ h1 {
   z-index: 1000;
   width: 90%;
   max-width: 400px;
+  pointer-events: none; /* Add this to allow clicking through when no notifications */
 }
 
 .notification {
@@ -571,6 +577,7 @@ h1 {
   transform: translateY(20px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  pointer-events: auto; /* Add this to make only visible notifications clickable */
 }
 
 .notification.success {
@@ -602,6 +609,7 @@ h1 {
   opacity: 0;
   transform: translateY(20px);
   pointer-events: none;
+  visibility: hidden; /* Add this to completely remove from interaction */
 }
 
 @keyframes smoothFadeIn {
