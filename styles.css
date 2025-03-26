@@ -20,11 +20,12 @@ body {
   font-family: "Montserrat", sans-serif;
   background: linear-gradient(135deg, var(--bg-light) 0%, #e3e6ec 100%);
   margin: 0;
-  padding: 0.5rem; /* Reduce padding */
+  padding: 0.5rem; 
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Change from center to flex-start */
+  align-items: flex-start;
+  user-select: none;
 }
 
 .container {
