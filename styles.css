@@ -286,6 +286,27 @@ h1 {
   color: var(--bg-white);
 }
 
+/* Update the button styles to ensure perfect centering */
+.stop-btn,
+.reset-btn,
+.change-btn,
+.info-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0; 
+}
+
+
+.stop-btn img,
+.reset-btn img,
+.change-btn img,
+.info-btn img {
+  margin: 0; 
+  position: static; 
+  transform: none;
+}
+
 /* Results Styles */
 .results-container {
   position: fixed;
@@ -435,7 +456,7 @@ h1 {
   width: 100%;
   background: linear-gradient(180deg, var(--danger), var(--danger-dark));
   border-radius: 8px 8px 0 0;
-  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Faster transition */
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
   position: relative;
   min-height: 15%;
   animation: wave 5s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
@@ -768,6 +789,27 @@ h1 {
   .notification {
     padding: 1rem;
   }
+
+  /* Specifically target mobile devices */
+  .stop-btn,
+  .reset-btn,
+  .change-btn,
+  .info-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .stop-btn img,
+  .reset-btn img,
+  .change-btn img,
+  .info-btn img {
+    width: 20px; 
+    height: 20px;
+    margin: auto;
+    display: block;
+  }
 }
 
 [data-tooltip] {
@@ -816,7 +858,7 @@ h1 {
 [data-tooltip]:after {
   content: "";
   border-style: solid;
-  border-width: var(--arrow-size) var(--arrow-size) 0px var(--arrow-size); /* CSS triangle */
+  border-width: var(--arrow-size) var(--arrow-size) 0px var(--arrow-size); 
   border-color: rgba(55, 64, 70, 0.9) transparent transparent transparent;
   transition-duration: 0s;
   transform-origin: top;
@@ -919,17 +961,22 @@ h1 {
   border-radius: 8px;
   transition: all 0.3s ease;
   min-width: 160px;
-  padding-bottom: 3%;
 }
 .info-btn span {
   font-size: 14px;
   font-weight: 700;
   color: gray;
   position: relative;
-  top: -3.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1%;
 }
 .info-btn img {
-  transform: translateY(4.5px);
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  display: block;
 }
 .info-btn:hover {
   background-color: var(--bg-light);
@@ -947,7 +994,7 @@ h1 {
   .buttons {
     justify-content: center;
     gap: 1rem;
-    flex-direction: row; /* Keep buttons horizontal */
+    flex-direction: row;
   }
 
   .stop-btn,
@@ -994,12 +1041,17 @@ h1 {
 }
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
+@media (min-width: 964px) {
   .container {
     padding: 2rem;
     width: 95%;
   }
-
+  .info-btn img {
+    transform: translateY(10px);
+  }
+  .info-btn span {
+    top: 8px;
+  }
   .buttons {
     justify-content: flex-start;
     gap: 1.5rem;
@@ -1032,13 +1084,18 @@ h1 {
   }
 }
 
-/* Large devices (desktops, 1024px and up) */
-@media (min-width: 1024px) {
+/* Large devices (desktops, 1020px and up) */
+@media (min-width: 964px) {
   .container {
     max-width: 900px;
     padding: 2.5rem;
   }
-
+  .info-btn img {
+    transform: translateY(4px);
+  }
+  .info-btn span {
+    top: 5px;
+  }
   .input {
     width: 96%;
   }
@@ -1049,7 +1106,12 @@ h1 {
   body {
     padding: 0.25rem;
   }
-
+  .info-btn img {
+    transform: translateY(4px);
+  }
+  .info-btn span {
+    top: 5px;
+  }
   .container {
     padding: 0.75rem;
     border-radius: 12px;
@@ -1139,6 +1201,12 @@ h1 {
   .test-area {
     margin: 1rem 0;
   }
+  .info-btn img {
+    transform: translateY(4px);
+  }
+  .info-btn span {
+    top: 4px;
+  }
 }
 
 /* Add styles for very small devices */
@@ -1171,9 +1239,17 @@ h1 {
     width: 28px;
     height: 28px;
   }
+
+  .stop-btn img,
+  .reset-btn img,
+  .change-btn img,
+  .info-btn img {
+    width: 18px;
+    height: 18px;
+  }
 }
 
-/* Add close button styles for notifications */
+
 .notification-close {
   position: absolute;
   top: 10px;
@@ -1255,7 +1331,7 @@ h1 {
   text-decoration-color: var(--danger);
 }
 
-/* Add these keyframe animations first */
+
 @keyframes float {
   0% {
     transform: translateY(-100%) rotate(0deg);
@@ -1293,7 +1369,7 @@ h1 {
   text-shadow: 0 0 10px rgba(85, 85, 85, 0.425);
 }
 
-/* Generate multiple elements with different animations */
+
 .floating-element:nth-child(1) {
   content: "⌨";
   left: 2%;
@@ -1416,7 +1492,7 @@ h1 {
   animation-delay: 10.5s;
 }
 
-/* Add more floating elements with different positions */
+
 .floating-element:nth-child(21) {
   content: "⌨";
   left: 7%;
@@ -1509,7 +1585,6 @@ h1 {
   animation-delay: 5.2s;
 }
 
-/* Add after your existing floating-element styles */
 @media (min-width: 1024px) {
   .floating-element:nth-child(36) {
     content: "⌨";
@@ -1573,7 +1648,7 @@ h1 {
   }
 }
 
-/* Add this to make background animation container wider on large screens */
+
 @media (min-width: 1024px) {
   .background-animation {
     width: 120%;
