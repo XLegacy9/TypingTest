@@ -28,6 +28,8 @@ const resultsContainer = document.querySelector(".results-container");
 const changeButton = document.getElementById("changeParagraph");
 const speedCanvas = document.getElementById("speedCanvas");
 const ctx = speedCanvas.getContext("2d");
+const pausePlayBtn = document.getElementById("pausePlayBtn");
+const pausePlayIcon = document.getElementById("pausePlayIcon");
 
 // State variables
 let currentParagraphIndex = 0;
@@ -37,6 +39,9 @@ let isTyping = false;
 let mistakes = 0;
 let correctChars = 0;
 let totalChars = 0;
+let isPaused = false;
+let pausedTime = 0;
+let pauseStartTime = 0;
 
 // Replace the handleInput function
 function handleInput(e) {
@@ -48,6 +53,7 @@ function handleInput(e) {
     startTimer();
     stopButton.disabled = false;
     changeButton.disabled = true;
+    pausePlayBtn.disabled = false; // Enable pause button when typing starts
   }
 
   if (isTyping) {
@@ -93,9 +99,9 @@ function updateAccuracyDisplays() {
 
 // Update the startTimer function
 function startTimer() {
-  const startTime = Date.now();
+  const startTime = Date.now() - timeElapsed * 1000 - pausedTime;
   timer = setInterval(() => {
-    timeElapsed = Math.floor((Date.now() - startTime) / 1000);
+    timeElapsed = Math.floor((Date.now() - startTime - pausedTime) / 1000);
     timerDisplay.textContent = `${timeElapsed}s`;
     updateSpeed();
   }, 1000);
@@ -182,6 +188,7 @@ function finishTest() {
   textArea.disabled = true;
   stopButton.disabled = true;
   changeButton.disabled = false;
+  pausePlayBtn.disabled = true;
 
   const words = textArea.value.trim().split(/\s+/).length;
   const minutes = timeElapsed / 60;
@@ -307,6 +314,11 @@ function resetTest() {
   stopButton.disabled = true;
   changeButton.disabled = false;
   resultsContainer.classList.add("hidden");
+  isPaused = false;
+  pausedTime = 0;
+  pauseStartTime = 0;
+  pausePlayIcon.src = "pause.png";
+  pausePlayBtn.disabled = true;
 
   // Reset graphical elements
   drawSpeedometer(0);
@@ -352,11 +364,37 @@ function updateErrors() {
   errorLabel.textContent = `${mistakes} Errors`;
 }
 
+// Add this new function
+function togglePausePlay() {
+  if (!isTyping) return;
+
+  isPaused = !isPaused;
+
+  if (isPaused) {
+    // Pause the test
+    clearInterval(timer);
+    pauseStartTime = Date.now();
+    pausePlayIcon.src = "play.png";
+    textArea.disabled = true;
+
+    // Show pause notification
+    showNotification("info", "Test paused. Click play to resume.");
+  } else {
+    // Resume the test
+    pausedTime += Date.now() - pauseStartTime;
+    startTimer();
+    pausePlayIcon.src = "pause.png";
+    textArea.disabled = false;
+    textArea.focus();
+  }
+}
+
 // Event Listeners
 textArea.addEventListener("input", handleInput);
 stopButton.addEventListener("click", stopTest);
 resetButton.addEventListener("click", resetTest);
 changeButton.addEventListener("click", changeParagraph);
+pausePlayBtn.addEventListener("click", togglePausePlay);
 document.getElementById("closeResults").addEventListener("click", () => {
   resultsContainer.classList.add("hidden");
 });
@@ -410,3 +448,6 @@ function checkFailureConditions(wpm, errors, duration) {
   }
   return { failed: false, reason: "" };
 }
+
+// Add to your initialization code
+pausePlayBtn.disabled = true;
