@@ -19,6 +19,44 @@ See LICENSE file for details
   </head>
 
   <body>
+    <div class="background-animation">
+      <div class="floating-element">⌨</div>
+      <div class="floating-element">⏎</div>
+      <div class="floating-element">⇧</div>
+      <div class="floating-element">⌫</div>
+      <div class="floating-element">⎵</div>
+      <div class="floating-element">⇪</div>
+      <div class="floating-element">⌘</div>
+      <div class="floating-element">⏻</div>
+      <div class="floating-element">⇥</div>
+      <div class="floating-element">⌥</div>
+      <div class="floating-element">⌨</div>
+      <div class="floating-element">⏎</div>
+      <div class="floating-element">⇧</div>
+      <div class="floating-element">⌫</div>
+      <div class="floating-element">⎵</div>
+      <div class="floating-element">⇪</div>
+      <div class="floating-element">⌘</div>
+      <div class="floating-element">⏻</div>
+      <div class="floating-element">⇥</div>
+      <div class="floating-element">⌥</div>
+      <div class="floating-element">⌨</div>
+      <div class="floating-element">⏎</div>
+      <div class="floating-element">⇧</div>
+      <div class="floating-element">⌫</div>
+      <div class="floating-element">⎵</div>
+      <div class="floating-element">⌨</div>
+      <div class="floating-element">⏎</div>
+      <div class="floating-element">⇧</div>
+      <div class="floating-element">⌫</div>
+      <div class="floating-element">⎵</div>
+      <div class="floating-element">⇪</div>
+      <div class="floating-element">⌘</div>
+      <div class="floating-element">⏻</div>
+      <div class="floating-element">⇥</div>
+      <div class="floating-element">⌥</div>
+    </div>
+
     <div class="container">
       <h1 class="heading-text">
         Test Your Typing Speed
@@ -57,23 +95,29 @@ See LICENSE file for details
           disabled
           data-tooltip="Stop Test"
         >
-          <img src="Stop.png" alt="" width="30px" height="30px" />
+          <img src="Stop.png" alt="Stop Test" width="30px" height="30px" />
         </button>
         <button id="reset" class="reset-btn" data-tooltip="Reset Test">
-          <img src="restart.png" alt="" width="30px" height="30px" />
+          <img src="restart.png" alt="Reset Test" width="30px" height="30px" />
         </button>
         <button
           id="changeParagraph"
           class="change-btn"
           data-tooltip="Change Paragraph"
         >
-          <img src="change.png" alt="" width="30px" height="30px" />
+          <img
+            src="change.png"
+            alt="Change Paragraph"
+            width="30px"
+            height="30px"
+          />
         </button>
         <button
           id="infoButton"
           class="info-btn"
           data-tooltip="Test Information"
         >
+          <span>Test information </span>
           <img src="info.png" alt="" width="30px" height="30px" />
         </button>
       </div>
@@ -81,7 +125,11 @@ See LICENSE file for details
 
     <div class="results-container hidden">
       <div class="results-popup">
-        <button id="closeResults" class="close-btn" aria-label="Close Results">
+        <button
+          id="closeResults"
+          class="notification-result-close"
+          aria-label="Close Results"
+        >
           ×
         </button>
         <h2>Test Results</h2>
@@ -141,7 +189,7 @@ See LICENSE file for details
         <button class="notification-close" aria-label="Close notification">
           ×
         </button>
-        <h4>Test Passed!</h4>
+        <h4>Test Passed! 🎉</h4>
         <div class="notification-stats">
           <p>Speed: <span id="finalSpeedValue">0 WPM</span></p>
           <p>Accuracy: <span id="finalAccuracyValue">0%</span></p>
@@ -153,16 +201,32 @@ See LICENSE file for details
         <button class="notification-close" aria-label="Close notification">
           ×
         </button>
-        <h4>Test Failed</h4>
+        <h4>Test Failed! ❌</h4>
         <p id="failureReason"></p>
         <div class="requirements">
           <p>Requirements:</p>
           <ul>
             <li>Speed: At least 30 WPM</li>
             <li>Accuracy: At least 90%</li>
-            <li>Time: Under 30 seconds</li>
+            <li>Time: Under 45 seconds</li>
           </ul>
         </div>
+      </div>
+
+      <div class="notification warning hidden" id="warningNotification">
+        <button class="notification-close" aria-label="Close notification">
+          ×
+        </button>
+        <h4>Almost There! 🎯</h4>
+        <div class="notification-stats">
+          <p>Speed: <span id="warningSpeedValue">0 WPM</span></p>
+          <p>Accuracy: <span id="warningAccuracyValue">0%</span></p>
+          <p>Time: <span id="warningTimeValue">0s</span></p>
+        </div>
+        <p class="encouragement-message">
+          Great effort! You've met the speed and accuracy requirements. Try to
+          complete the test within 45 seconds for a perfect score!
+        </p>
       </div>
     </div>
 
@@ -171,12 +235,15 @@ See LICENSE file for details
         <button class="close-info-btn" id="closeInfo">×</button>
         <h3>🎯 Test Requirements</h3>
         <div class="info-requirements">
-          <h4>To Pass the Test, You Need:</h4>
+          <h4>Test Requirements:</h4>
           <ul>
-            <li>🚀 Speed: Minimum 30 WPM</li>
-            <li>✨ Accuracy: At least 90%</li>
-            <li>⏱️ Time: Complete within 45 seconds</li>
-            <li>✍ Average typing speed of a Typist is 34 WPM</li>
+            <li>⚡ Speed: At least 30 WPM</li>
+            <li>🎯 Accuracy: At least 90%</li>
+            <li>🕒 Time: Under 45 seconds</li>
+            <li>
+              🏆 Perfect score: 100% accuracy, 45 WPM and under 45 seconds
+            </li>
+            <li>🏁 Close pass: 90% accuracy, 30WPM and under 60 seconds</li>
           </ul>
           <div class="info-tips">
             <h4>Tips:</h4>
@@ -184,6 +251,7 @@ See LICENSE file for details
               <li>Practice regular typing to improve speed</li>
               <li>Focus on accuracy over speed initially</li>
               <li>Take short breaks between attempts</li>
+              <li>Fact: Average typing speed of a Typist is around 40 WPM</li>
             </ul>
           </div>
         </div>
