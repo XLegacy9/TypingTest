@@ -1,10 +1,10 @@
 :root {
   /* Color variables */
-  --primary: #4dabf7;
+  --primary: #a7d7ff;
   --primary-dark: #3793dd;
   --secondary: #ffffff;
-  --danger: #dc3545;
-  --danger-dark: #ff8995;
+  --danger: #f19da5;
+  --danger-dark: #f1c3c8;
   --success: #20c997;
   --success-dark: #15a37f;
   --text-primary: #2c3e50;
@@ -14,6 +14,8 @@
   --bg-light-gray: #f1f3f5;
   --border-color: #dee2e6;
   --shadow-color: rgba(0, 0, 0, 0.1);
+  --warning: #ffc107;
+  --warning-dark: #ffcd39;
 }
 
 body {
@@ -179,6 +181,7 @@ h1 {
   box-shadow: inset 0 2px 4px var(--shadow-color);
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 9%;
 }
 
 .stop-btn {
@@ -194,6 +197,7 @@ h1 {
 
 .stop-btn:disabled {
   cursor: not-allowed;
+  background-color: var(--primary);
 }
 
 .reset-btn {
@@ -229,10 +233,8 @@ h1 {
 }
 
 .change-btn:disabled {
-  background-color: var(--secondary);
+  background-color: var(--danger-dark);
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
 }
 .close-btn {
   display: block;
@@ -258,7 +260,7 @@ h1 {
 .close-btn:active {
   transform: translateY(0);
 }
-/* Close button styling */
+
 .close-btn {
   position: absolute;
   top: 15px;
@@ -280,7 +282,7 @@ h1 {
 }
 
 .close-btn:hover {
-  background: var(--danger);
+  background: var(--bg-light-gray);
   color: var(--bg-white);
 }
 
@@ -612,6 +614,28 @@ h1 {
   visibility: hidden; /* Add this to completely remove from interaction */
 }
 
+.notification.warning {
+  background-color: #ffd43b;
+  color: #000;
+  box-shadow: 0 8px 25px rgba(255, 212, 59, 0.25);
+}
+
+.notification.warning .notification-close {
+  color: #000;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.notification.warning .encouragement-message {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.notification.warning h4 {
+  color: #000;
+}
+
 @keyframes smoothFadeIn {
   from {
     opacity: 0;
@@ -892,10 +916,21 @@ h1 {
   height: 40px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  border-radius: 4px;
+  border-radius: 8px;
   transition: all 0.3s ease;
+  min-width: 200px;
+  padding-bottom: 3%;
 }
-
+.info-btn span {
+  font-size: 16px;
+  font-weight: 700;
+  color: gray;
+  position: relative;
+  top: -3.5px;
+}
+.info-btn img {
+  transform: translateY(4.5px);
+}
 .info-btn:hover {
   background-color: var(--bg-light);
   transform: translateY(-2px);
@@ -912,7 +947,7 @@ h1 {
   .buttons {
     justify-content: center;
     gap: 1rem;
-    flex-direction: row; /* Keep buttons horizontal */
+    flex-direction: row;
   }
 
   .stop-btn,
@@ -1138,7 +1173,6 @@ h1 {
   }
 }
 
-/* Add close button styles for notifications */
 .notification-close {
   position: absolute;
   top: 10px;
@@ -1167,6 +1201,34 @@ h1 {
 .notification-close:active {
   transform: scale(0.9);
 }
+.notification-result-close {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 0, 0, 0.315);
+  border: none;
+  color: var(--danger);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.notification-result-close:hover {
+  background: rgba(255, 76, 76, 0.342);
+  transform: scale(1.1);
+}
+
+.notification-result-close:active {
+  transform: scale(0.9);
+}
 
 .error {
   color: var(--danger);
@@ -1190,4 +1252,330 @@ h1 {
   color: var(--danger);
   text-decoration: underline wavy;
   text-decoration-color: var(--danger);
+}
+
+
+@keyframes float {
+  0% {
+    transform: translateY(-100%) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-element {
+  position: absolute;
+  color: var(--text-secondary);
+  opacity: 0;
+  font-size: 64px;
+  user-select: none;
+  text-shadow: 0 0 10px rgba(85, 85, 85, 0.425);
+}
+
+
+.floating-element:nth-child(1) {
+  content: "⌨";
+  left: 2%;
+  animation: float 8s linear infinite;
+  animation-delay: 0s;
+}
+.floating-element:nth-child(2) {
+  content: "⏎";
+  left: 15%;
+  animation: float 10s linear infinite;
+  animation-delay: 1s;
+}
+.floating-element:nth-child(3) {
+  content: "⇧";
+  left: 25%;
+  animation: float 7s linear infinite;
+  animation-delay: 2s;
+}
+.floating-element:nth-child(4) {
+  content: "⌫";
+  left: 35%;
+  animation: float 9s linear infinite;
+  animation-delay: 3s;
+}
+.floating-element:nth-child(5) {
+  content: "⎵";
+  left: 45%;
+  animation: float 11s linear infinite;
+  animation-delay: 4s;
+}
+.floating-element:nth-child(6) {
+  content: "⇪";
+  left: 55%;
+  animation: float 8s linear infinite;
+  animation-delay: 5s;
+}
+.floating-element:nth-child(7) {
+  content: "⌘";
+  left: 65%;
+  animation: float 10s linear infinite;
+  animation-delay: 6s;
+}
+.floating-element:nth-child(8) {
+  content: "⏻";
+  left: 75%;
+  animation: float 9s linear infinite;
+  animation-delay: 7s;
+}
+.floating-element:nth-child(9) {
+  content: "⇥";
+  left: 85%;
+  animation: float 7s linear infinite;
+  animation-delay: 8s;
+}
+.floating-element:nth-child(10) {
+  content: "⌥";
+  left: 95%;
+  animation: float 11s linear infinite;
+  animation-delay: 9s;
+}
+/* Add more elements */
+.floating-element:nth-child(11) {
+  content: "⌨";
+  left: 12%;
+  animation: float 12s linear infinite;
+  animation-delay: 1.5s;
+}
+.floating-element:nth-child(12) {
+  content: "⏎";
+  left: 20%;
+  animation: float 9s linear infinite;
+  animation-delay: 2.5s;
+}
+.floating-element:nth-child(13) {
+  content: "⇧";
+  left: 30%;
+  animation: float 11s linear infinite;
+  animation-delay: 3.5s;
+}
+.floating-element:nth-child(14) {
+  content: "⌫";
+  left: 40%;
+  animation: float 8s linear infinite;
+  animation-delay: 4.5s;
+}
+.floating-element:nth-child(15) {
+  content: "⎵";
+  left: 50%;
+  animation: float 10s linear infinite;
+  animation-delay: 5.5s;
+}
+.floating-element:nth-child(16) {
+  content: "⇪";
+  left: 60%;
+  animation: float 7s linear infinite;
+  animation-delay: 6.5s;
+}
+.floating-element:nth-child(17) {
+  content: "⌘";
+  left: 70%;
+  animation: float 9s linear infinite;
+  animation-delay: 7.5s;
+}
+.floating-element:nth-child(18) {
+  content: "⏻";
+  left: 80%;
+  animation: float 11s linear infinite;
+  animation-delay: 8.5s;
+}
+.floating-element:nth-child(19) {
+  content: "⇥";
+  left: 90%;
+  animation: float 8s linear infinite;
+  animation-delay: 9.5s;
+}
+.floating-element:nth-child(20) {
+  content: "⌥";
+  left: 100%;
+  animation: float 10s linear infinite;
+  animation-delay: 10.5s;
+}
+
+
+.floating-element:nth-child(21) {
+  content: "⌨";
+  left: 7%;
+  animation: float 9s linear infinite;
+  animation-delay: 0.5s;
+}
+.floating-element:nth-child(22) {
+  content: "⏎";
+  left: 18%;
+  animation: float 11s linear infinite;
+  animation-delay: 1.2s;
+}
+.floating-element:nth-child(23) {
+  content: "⇧";
+  left: 28%;
+  animation: float 8s linear infinite;
+  animation-delay: 2.3s;
+}
+.floating-element:nth-child(24) {
+  content: "⌫";
+  left: 38%;
+  animation: float 10s linear infinite;
+  animation-delay: 3.4s;
+}
+.floating-element:nth-child(25) {
+  content: "⎵";
+  left: 48%;
+  animation: float 7s linear infinite;
+  animation-delay: 4.6s;
+}
+.floating-element:nth-child(26) {
+  content: "⇪";
+  left: 58%;
+  animation: float 9s linear infinite;
+  animation-delay: 5.7s;
+}
+.floating-element:nth-child(27) {
+  content: "⌘";
+  left: 68%;
+  animation: float 11s linear infinite;
+  animation-delay: 6.8s;
+}
+.floating-element:nth-child(28) {
+  content: "⏻";
+  left: 78%;
+  animation: float 8s linear infinite;
+  animation-delay: 7.9s;
+}
+.floating-element:nth-child(29) {
+  content: "⇥";
+  left: 88%;
+  animation: float 10s linear infinite;
+  animation-delay: 8.2s;
+}
+.floating-element:nth-child(30) {
+  content: "⌥";
+  left: 98%;
+  animation: float 7s linear infinite;
+  animation-delay: 9.3s;
+}
+
+.floating-element:nth-child(31) {
+  content: "⌨";
+  left: 12%;
+  animation: float 11s linear infinite;
+  animation-delay: 1.7s;
+}
+.floating-element:nth-child(32) {
+  content: "⏎";
+  left: 22%;
+  animation: float 8s linear infinite;
+  animation-delay: 2.8s;
+}
+.floating-element:nth-child(33) {
+  content: "⇧";
+  left: 32%;
+  animation: float 10s linear infinite;
+  animation-delay: 3.9s;
+}
+.floating-element:nth-child(34) {
+  content: "⌫";
+  left: 42%;
+  animation: float 7s linear infinite;
+  animation-delay: 4.1s;
+}
+.floating-element:nth-child(35) {
+  content: "⎵";
+  left: 52%;
+  animation: float 9s linear infinite;
+  animation-delay: 5.2s;
+}
+
+
+@media (min-width: 1024px) {
+  .floating-element:nth-child(36) {
+    content: "⌨";
+    left: -5%;
+    animation: float 9s linear infinite;
+    animation-delay: 0.3s;
+  }
+  .floating-element:nth-child(37) {
+    content: "⏎";
+    left: -2%;
+    animation: float 11s linear infinite;
+    animation-delay: 1.4s;
+  }
+  .floating-element:nth-child(38) {
+    content: "⇧";
+    left: 102%;
+    animation: float 8s linear infinite;
+    animation-delay: 2.5s;
+  }
+  .floating-element:nth-child(39) {
+    content: "⌫";
+    left: 105%;
+    animation: float 10s linear infinite;
+    animation-delay: 3.6s;
+  }
+  .floating-element:nth-child(40) {
+    content: "⎵";
+    left: -8%;
+    animation: float 7s linear infinite;
+    animation-delay: 4.7s;
+  }
+  .floating-element:nth-child(41) {
+    content: "⇪";
+    left: 108%;
+    animation: float 9s linear infinite;
+    animation-delay: 5.8s;
+  }
+  .floating-element:nth-child(42) {
+    content: "⌘";
+    left: -10%;
+    animation: float 11s linear infinite;
+    animation-delay: 6.9s;
+  }
+  .floating-element:nth-child(43) {
+    content: "⏻";
+    left: 110%;
+    animation: float 8s linear infinite;
+    animation-delay: 7.1s;
+  }
+  .floating-element:nth-child(44) {
+    content: "⇥";
+    left: -12%;
+    animation: float 10s linear infinite;
+    animation-delay: 8.2s;
+  }
+  .floating-element:nth-child(45) {
+    content: "⌥";
+    left: 112%;
+    animation: float 7s linear infinite;
+    animation-delay: 9.3s;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .background-animation {
+    width: 120%;
+    left: -10%;
+  }
 }
