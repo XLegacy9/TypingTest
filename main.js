@@ -226,37 +226,47 @@ function finishTest() {
   resultsContainer.classList.remove("hidden");
 }
 
+// Update the checkTestResults function
 function checkTestResults(wpm, time) {
   const accuracy = Math.round((correctChars / totalChars) * 100) || 0;
 
   const successNotif = document.getElementById("successNotification");
+  const warningNotif = document.getElementById("warningNotification");
   const failureNotif = document.getElementById("failureNotification");
 
-  // Hide both notifications first
-  successNotif.classList.add("hidden");
-  successNotif.classList.remove("show");
-  failureNotif.classList.add("hidden");
-  failureNotif.classList.remove("show");
+  // Hide all notifications first
+  [successNotif, warningNotif, failureNotif].forEach((notif) => {
+    notif.classList.add("hidden");
+    notif.classList.remove("show");
+  });
 
-  const passed = wpm >= 30 && accuracy >= 90 && time <= 45;
+  // Perfect pass: Under 45 seconds with required WPM and accuracy
+  const perfectPass = wpm >= 30 && accuracy >= 90 && time <= 45;
+  // Close pass: Between 45-60 seconds with required WPM and accuracy
+  const closePass = wpm >= 30 && accuracy >= 90 && time > 45 && time <= 60;
 
-  if (passed) {
+  if (perfectPass) {
     // Update success notification
     document.getElementById("finalSpeedValue").textContent = `${wpm} WPM`;
     document.getElementById("finalAccuracyValue").textContent = `${accuracy}%`;
     document.getElementById("finalTimeValue").textContent = `${time}s`;
-
-    // Show success notification
     successNotif.classList.remove("hidden");
     successNotif.classList.add("show");
+  } else if (closePass) {
+    // Show warning notification for close pass
+    document.getElementById("warningSpeedValue").textContent = `${wpm} WPM`;
+    document.getElementById(
+      "warningAccuracyValue"
+    ).textContent = `${accuracy}%`;
+    document.getElementById("warningTimeValue").textContent = `${time}s`;
+    warningNotif.classList.remove("hidden");
+    warningNotif.classList.add("show");
   } else {
     // Build failure message
     let reasons = [];
     if (wpm < 30) reasons.push(`Speed: ${wpm} WPM (need 30+ WPM)`);
     if (accuracy < 90) reasons.push(`Accuracy: ${accuracy}% (need 90%+)`);
-    if (time > 45) reasons.push(`Time: ${time}s (must be under 45s)`);
-
-    // Update and show failure notification
+    if (time > 60) reasons.push(`Time: ${time}s (must be under 60s)`);
     document.getElementById("failureReason").textContent = reasons.join("\n");
     failureNotif.classList.remove("hidden");
     failureNotif.classList.add("show");
@@ -387,12 +397,16 @@ function calculateAccuracy(correctChars, totalChars) {
   return Math.round((correctChars / totalChars) * 100);
 }
 
+// Update the checkFailureConditions function
 function checkFailureConditions(wpm, errors, duration) {
-  if (wpm < 20) {
+  if (wpm < 30) {
     return { failed: true, reason: "typing speed is too low" };
   }
   if (errors > 10) {
     return { failed: true, reason: "too many errors" };
+  }
+  if (duration > 45) {
+    return { failed: true, reason: "time limit exceeded" };
   }
   return { failed: false, reason: "" };
 }
