@@ -918,11 +918,11 @@ h1 {
   transition: background-color 0.3s ease;
   border-radius: 8px;
   transition: all 0.3s ease;
-  min-width: 170px;
+  min-width: 160px;
   padding-bottom: 3%;
 }
 .info-btn span {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   color: gray;
   position: relative;
@@ -947,7 +947,7 @@ h1 {
   .buttons {
     justify-content: center;
     gap: 1rem;
-    flex-direction: row;
+    flex-direction: row; /* Keep buttons horizontal */
   }
 
   .stop-btn,
@@ -1173,6 +1173,7 @@ h1 {
   }
 }
 
+/* Add close button styles for notifications */
 .notification-close {
   position: absolute;
   top: 10px;
@@ -1210,7 +1211,7 @@ h1 {
   border-radius: 50%;
   background: rgba(255, 0, 0, 0.315);
   border: none;
-  color: white;
+  color: var(--danger);
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
@@ -1254,7 +1255,7 @@ h1 {
   text-decoration-color: var(--danger);
 }
 
-
+/* Add these keyframe animations first */
 @keyframes float {
   0% {
     transform: translateY(-100%) rotate(0deg);
@@ -1292,7 +1293,7 @@ h1 {
   text-shadow: 0 0 10px rgba(85, 85, 85, 0.425);
 }
 
-
+/* Generate multiple elements with different animations */
 .floating-element:nth-child(1) {
   content: "⌨";
   left: 2%;
@@ -1415,7 +1416,7 @@ h1 {
   animation-delay: 10.5s;
 }
 
-
+/* Add more floating elements with different positions */
 .floating-element:nth-child(21) {
   content: "⌨";
   left: 7%;
@@ -1508,7 +1509,7 @@ h1 {
   animation-delay: 5.2s;
 }
 
-
+/* Add after your existing floating-element styles */
 @media (min-width: 1024px) {
   .floating-element:nth-child(36) {
     content: "⌨";
@@ -1572,7 +1573,7 @@ h1 {
   }
 }
 
-
+/* Add this to make background animation container wider on large screens */
 @media (min-width: 1024px) {
   .background-animation {
     width: 120%;
