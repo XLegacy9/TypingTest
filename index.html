@@ -81,45 +81,64 @@ See LICENSE file for details
           every letter of the English alphabet at least once. Typing practice is
           essential for improving your speed and accuracy on the keyboard.
         </div>
-        <textarea
-          id="input"
-          class="input"
-          placeholder="Start typing here..."
-        ></textarea>
-      </div>
 
-      <div class="buttons">
-        <button
-          id="stopTest"
-          class="stop-btn"
-          disabled
-          data-tooltip="Stop Test"
-        >
-          <img src="Stop.png" alt="Stop Test" width="30px" height="30px" />
-        </button>
-        <button id="reset" class="reset-btn" data-tooltip="Reset Test">
-          <img src="restart.png" alt="Reset Test" width="30px" height="30px" />
-        </button>
-        <button
-          id="changeParagraph"
-          class="change-btn"
-          data-tooltip="Change Paragraph"
-        >
-          <img
-            src="change.png"
-            alt="Change Paragraph"
-            width="30px"
-            height="30px"
-          />
-        </button>
-        <button
-          id="infoButton"
-          class="info-btn"
-          data-tooltip="Test Information"
-        >
-          <span>Test information </span>
-          <img src="info.png" alt="" width="25px" height="25px" />
-        </button>
+        <div class="input-container">
+          <div class="buttons">
+            <button
+              id="stopTest"
+              class="stop-btn"
+              disabled
+              data-tooltip="Stop Test"
+            >
+              <img src="Stop.png" alt="Stop Test" width="30px" height="30px" />
+            </button>
+            <button id="reset" class="reset-btn" data-tooltip="Reset Test">
+              <img
+                src="refresh.png"
+                alt="Reset Test"
+                width="30px"
+                height="30px"
+              />
+            </button>
+            <button
+              id="changeParagraph"
+              class="change-btn"
+              data-tooltip="Change Paragraph"
+            >
+              <img
+                src="nextparagraph.png"
+                alt="Change Paragraph"
+                width="30px"
+                height="30px"
+              />
+            </button>
+            <button
+              id="pausePlayBtn"
+              class="pause-play-btn"
+              data-tooltip="Pause/Resume Test"
+            >
+              <img
+                src="pause.png"
+                alt="Pause/Play"
+                id="pausePlayIcon"
+                width="30px"
+                height="30px"
+              />
+            </button>
+            <button
+              id="infoButton"
+              class="info-btn"
+              data-tooltip="Test Information"
+            >
+              <img src="info.png" alt="" width="30px" height="30px" />
+            </button>
+          </div>
+          <textarea
+            id="input"
+            class="input"
+            placeholder="Start typing here..."
+          ></textarea>
+        </div>
       </div>
     </div>
 
@@ -252,6 +271,13 @@ See LICENSE file for details
               <li>Focus on accuracy over speed initially</li>
               <li>Take short breaks between attempts</li>
               <li>Fact: Average typing speed of a Typist is around 40 WPM</li>
+              <br />
+              <hr />
+              <br />
+              <li>
+                Developed and designed by
+                <a href="https://github.com/XLegacy9/">@xlegacy9</a>
+              </li>
             </ul>
           </div>
         </div>
